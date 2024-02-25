@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   HamburgerMenuIcon,
   MobileIcon,
@@ -36,7 +36,9 @@ export default function NavbarPrimary() {
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Billing</DropdownMenuItem>
             <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={"/"}>HOW?</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
@@ -54,10 +56,24 @@ export default function NavbarPrimary() {
                     Sign in or create your accout to manage your profile
                   </p>
                   <div className="mt-3 flex items-center gap-2">
-                    <Button asChild>
-                      <Link href="/login">Sign In</Link>
-                    </Button>
-                    <Link href={"/"}>Create Account</Link>
+                    <DropdownMenuItem asChild>
+                      <Button asChild>
+                        <Link
+                          href="/job-seeker/signin"
+                          className="cursor-pointer"
+                        >
+                          Sign In
+                        </Link>
+                      </Button>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={"/job-seeker/signup"}
+                        className="hover:underline cursor-pointer"
+                      >
+                        Create Account
+                      </Link>
+                    </DropdownMenuItem>
                   </div>
                 </div>
               </div>
@@ -73,10 +89,24 @@ export default function NavbarPrimary() {
                     fastest way
                   </p>
                   <div className="mt-3 flex items-center gap-2">
-                    <Button asChild>
-                      <Link href="/login">Sign In</Link>
-                    </Button>
-                    <Link href={"/"}>Create Account</Link>
+                    <DropdownMenuItem asChild>
+                      <Button asChild>
+                        <Link
+                          href="/employer/signin"
+                          className="cursor-pointer"
+                        >
+                          Sign In
+                        </Link>
+                      </Button>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        href={"/employer/signup"}
+                        className="hover:underline cursor-pointer"
+                      >
+                        Create Account
+                      </Link>
+                    </DropdownMenuItem>
                   </div>
                 </div>
               </div>
