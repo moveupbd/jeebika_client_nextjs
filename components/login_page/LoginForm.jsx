@@ -1,8 +1,36 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
+import { useForm } from "react-hook-form";
+import publicRequest from "@/utils/requestMethod";
+// import { cookies } from "next/headers";
 
 export default function LoginForm({ type }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const submitLogin = async (formData) => {
+    try {
+      const response = await publicRequest.post(
+        "/auth/applicant/login/",
+        formData
+      );
+
+      // cookies.set("token", response.data);
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  errors && console.log(errors);
+
   return (
     <div className="max-w-md border mx-auto mt-14 p-10 rounded-lg shadow-lg space-y-10">
       <div className="text-center">
@@ -14,16 +42,26 @@ export default function LoginForm({ type }) {
         </h4>
       </div>
 
-      <form className="">
+      <form className="" onSubmit={handleSubmit(submitLogin)}>
         <label className="font-medium mb-2 block">Your email</label>
         <input
+          {...register("email", { required: "Email is Required" })}
           type="email"
-          className="input-basic"
+          className={`input-basic ${errors?.email && "focus:outline-red-600"}`}
           placeholder="name@company.com"
+          name="email"
         />
 
         <label className="font-medium mb-2 block mt-6">Your password</label>
-        <input type="password" className="input-basic" placeholder="••••••••" />
+        <input
+          {...register("password", { required: "Password is Required" })}
+          type="password"
+          className={`input-basic ${
+            errors?.password && "focus:outline-red-600"
+          }`}
+          placeholder="••••••••"
+          name="password"
+        />
 
         <div className="flex items-center justify-between my-6">
           <div className="flex items-center">

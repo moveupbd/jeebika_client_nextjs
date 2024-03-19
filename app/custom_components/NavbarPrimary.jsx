@@ -31,13 +31,26 @@ export default function NavbarPrimary() {
             <CaretDownIcon className="inline" />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href={"/"}>HOW?</Link>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/user"}>Career Guide</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/"}>InterView Tips</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/"}>Resume Writing Tips</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/"}>Cover Letter</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/"}>Articles</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/"}>Career Counseling</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={"cursor-pointer"}>
+              <Link href={"/"}>Education/Training Guide</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

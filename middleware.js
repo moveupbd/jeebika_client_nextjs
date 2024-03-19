@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-let session = true;
+let session = false;
 
 // This function can be marked `async` if using `await` inside
 export default function middleware(request) {
