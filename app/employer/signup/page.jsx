@@ -1,10 +1,9 @@
-import RegistrationForm from "@/components/login_page/RegistrationForm";
-import React from "react";
+import EmployerRegistrationForm from "@/components/login_page/EmployerRegistrationForm";
 
 export default function EmployerRegistration() {
   return (
     <div>
-      <RegistrationForm type="emplyer" />
+      <EmployerRegistrationForm />
     </div>
   );
 }

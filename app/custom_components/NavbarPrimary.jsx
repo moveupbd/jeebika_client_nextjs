@@ -1,26 +1,36 @@
-import React, { Fragment } from "react";
-import {
-  HamburgerMenuIcon,
-  MobileIcon,
-  CaretDownIcon,
-} from "@radix-ui/react-icons";
+"use client";
+
+import React from "react";
+import { HamburgerMenuIcon, CaretDownIcon } from "@radix-ui/react-icons";
 import { FaUser, FaUserTie, FaPhone } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/features/auth/authSlice";
+import { useRouter } from "next/navigation";
 
 export default function NavbarPrimary() {
+  const { authData } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/");
+  };
+
   return (
-    <div className="container py-3 flex items-center justify-between">
-      <div>Company Logo</div>
+    <div className="container py-4 flex items-center justify-between">
+      <Link href={"/"}>
+        <p className="text-2xl font-semibold tracking-tighter">Jeebika.</p>
+      </Link>
       <div className="hidden md:flex items-center gap-4 text-sm">
         <Link href={"/"}>Create your Resume now</Link>
 
@@ -55,77 +65,83 @@ export default function NavbarPrimary() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button>Sign In</Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>
-              <div className="flex items-center gap-4">
-                <FaUser size={24} />
-                <div className="w-48">
-                  <h5 className="text-base xl:text-lg">Job Seekers</h5>
-                  <p className="text-sm font-light">
-                    Sign in or create your accout to manage your profile
-                  </p>
-                  <div className="mt-3 flex items-center gap-2">
-                    <DropdownMenuItem asChild>
-                      <Button asChild>
+        {!authData?.tokens ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button>Sign In</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <div className="flex items-center gap-4">
+                  <FaUser size={24} />
+                  <div className="w-48">
+                    <h5 className="text-base xl:text-lg">Job Seekers</h5>
+                    <p className="text-sm font-light">
+                      Sign in or create your accout to manage your profile
+                    </p>
+                    <div className="mt-3 flex items-center gap-2">
+                      <DropdownMenuItem asChild>
+                        <Button asChild>
+                          <Link
+                            href="/job-seeker/signin"
+                            className="cursor-pointer"
+                          >
+                            Sign In
+                          </Link>
+                        </Button>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
                         <Link
-                          href="/job-seeker/signin"
-                          className="cursor-pointer"
+                          href={"/job-seeker/signup"}
+                          className="hover:underline cursor-pointer"
                         >
-                          Sign In
+                          Create Account
                         </Link>
-                      </Button>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={"/job-seeker/signup"}
-                        className="hover:underline cursor-pointer"
-                      >
-                        Create Account
-                      </Link>
-                    </DropdownMenuItem>
+                      </DropdownMenuItem>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </DropdownMenuItem>
+              </DropdownMenuItem>
 
-            <DropdownMenuItem>
-              <div className="flex items-center gap-4">
-                <FaUserTie size={24} />
-                <div className="w-48">
-                  <h5 className="text-base xl:text-lg">Employers</h5>
-                  <p className="text-sm font-light">
-                    Sign in or create account to find the best candidates in the
-                    fastest way
-                  </p>
-                  <div className="mt-3 flex items-center gap-2">
-                    <DropdownMenuItem asChild>
-                      <Button asChild>
+              <DropdownMenuItem>
+                <div className="flex items-center gap-4">
+                  <FaUserTie size={24} />
+                  <div className="w-48">
+                    <h5 className="text-base xl:text-lg">Employers</h5>
+                    <p className="text-sm font-light">
+                      Sign in or create account to find the best candidates in
+                      the fastest way
+                    </p>
+                    <div className="mt-3 flex items-center gap-2">
+                      <DropdownMenuItem asChild>
+                        <Button asChild>
+                          <Link
+                            href="/employer/signin"
+                            className="cursor-pointer"
+                          >
+                            Sign In
+                          </Link>
+                        </Button>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
                         <Link
-                          href="/employer/signin"
-                          className="cursor-pointer"
+                          href={"/employer/signup"}
+                          className="hover:underline cursor-pointer"
                         >
-                          Sign In
+                          Create Account
                         </Link>
-                      </Button>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link
-                        href={"/employer/signup"}
-                        className="hover:underline cursor-pointer"
-                      >
-                        Create Account
-                      </Link>
-                    </DropdownMenuItem>
+                      </DropdownMenuItem>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Button variant={"secondary"} onClick={handleLogout}>
+            Sign Out
+          </Button>
+        )}
 
         <Link href={"/"} className="flex items-center gap-1.5">
           <FaPhone size={24} />

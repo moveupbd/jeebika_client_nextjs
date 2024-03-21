@@ -1,35 +1,51 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import publicRequest from "@/utils/requestMethod";
+import { useDispatch } from "react-redux";
+import { login } from "@/app/redux/features/auth/authSlice";
+import { useRouter } from "next/navigation";
 // import { cookies } from "next/headers";
 
 export default function LoginForm({ type }) {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const submitLogin = async (formData) => {
+    console.log("HIT");
     try {
-      const response = await publicRequest.post(
-        "/auth/applicant/login/",
-        formData
-      );
+      setLoading(true);
+      let url =
+        type === "employer"
+          ? "/auth/employee/login/"
+          : "/auth/applicant/login/";
+      const response = await publicRequest.post(url, formData);
 
-      // cookies.set("token", response.data);
+      if (response.status === 201) {
+        dispatch(login(response.data));
+        router.push("/");
+      }
 
-      console.log(response.data);
+      console.log(response);
     } catch (error) {
       console.log(error);
+      setError(error);
+    } finally {
+      setLoading(false);
     }
   };
-
-  errors && console.log(errors);
 
   return (
     <div className="max-w-md border mx-auto mt-14 p-10 rounded-lg shadow-lg space-y-10">
@@ -74,8 +90,16 @@ export default function LoginForm({ type }) {
           </Link>
         </div>
 
+        {error && (
+          <p className="text-red-600 mb-4 font-semibold">
+            {error.response.data.detail || error.message}
+          </p>
+        )}
+
         <Button className={"w-full"}>
-          <span className="text-base !font-normal">Login to your account</span>
+          <span className="text-base !font-normal">
+            {loading ? "Please wait..." : "Login to your account"}
+          </span>
         </Button>
       </form>
       <div>

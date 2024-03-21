@@ -5,14 +5,14 @@ import { FaFacebook, FaLinkedin } from "react-icons/fa";
 export default function GlobalNavBar() {
   return (
     <div className="hidden md:block bg-primary text-secondary text-xs font-light">
-      <div className="container py-1 flex items-center gap-4">
+      <div className="container py-2 flex items-center gap-4">
         <div className="flex items-center justify-between flex-1 max-w-md">
-          <Link href={"/"}>Jobs</Link>
+          <Link href={"/all-jobs"}>Jobs</Link>
           <Link href={"/"}>Tender/EOI</Link>
           <Link href={"/"}>Education/Training</Link>
           <Link href={"/"}>Others</Link>
           <Link
-            href={"/"}
+            href={"/employer/post-a-job"}
             className="bg-secondary text-primary py-1.5 px-3 rounded-lg font-semibold hover:opacity-95"
           >
             Post a job

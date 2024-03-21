@@ -3,6 +3,10 @@ import "./globals.css";
 import GlobalNavBar from "./custom_components/GlobalNavBar";
 import NavbarPrimary from "./custom_components/NavbarPrimary";
 
+import store from "./redux/store";
+import StoreProvider from "./redux/StoreProvider";
+import { Toaster } from "react-hot-toast";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,8 +19,20 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <GlobalNavBar />
-        <NavbarPrimary />
-        {children}
+        <StoreProvider>
+          <NavbarPrimary />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+              },
+            }}
+          />
+          {children}
+        </StoreProvider>
       </body>
     </html>
   );
