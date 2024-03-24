@@ -24,7 +24,6 @@ export default function LoginForm({ type }) {
   const dispatch = useDispatch();
 
   const submitLogin = async (formData) => {
-    console.log("HIT");
     try {
       setLoading(true);
       let url =

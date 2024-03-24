@@ -6,4 +6,8 @@ const publicRequest = axios.create({
   baseURL: baseURL,
 });
 
+export const authRequest = axios.create({
+  baseURL: baseURL,
+});
+
 export default publicRequest;

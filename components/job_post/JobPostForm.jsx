@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
+import publicRequest from "@/utils/requestMethod";
+import useApi from "@/hooks/useApi";
 
 export default function JobPostForm() {
   const jobPostFields = [
@@ -76,36 +78,13 @@ export default function JobPostForm() {
     {
       label: "Other Facilities",
       type: "text",
-      key: "compenother_facilitiessation",
+      key: "other_facilities",
     },
     {
       label: "Apply Procedure",
       type: "text",
       key: "apply_procedure",
     },
-
-    // {
-    //   user: 1,
-    //   category: 1,
-    //   service_type: 1,
-    //   company_title: "ABC Company3",
-    //   company_type: 1, // Make sure to provide the ID of an existing company_type
-    //   job_designation: "Software Engineer2",
-    //   vacancy: 5,
-    //   published: "2024-01-30",
-    //   deadline: "2024-02-15",
-    //   skill: "Python, Django",
-    //   experience: "2-4 years",
-    //   requirements: "Bachelor's degree in Computer Science",
-    //   responsibilities: "Develop and maintain web applications",
-    //   expertise: "Full Stack Development",
-    //   employment_status: "Full-time",
-    //   location: "City X",
-    //   company_info: "A leading tech company",
-    //   compensation: "Competitive salary",
-    //   other_facilities: null,
-    //   apply_procedure: "Submit your resume through the online application form",
-    // },
   ];
 
   const jobPostTextArea = [
@@ -121,14 +100,38 @@ export default function JobPostForm() {
     },
   ];
 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const { authRequest } = useApi();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const submitForm = (formData) => {
-    console.log(formData);
+  const submitForm = async (formData) => {
+    formData = { ...formData, published: new Date().toJSON().slice(0, 10) };
+
+    try {
+      setLoading(true);
+
+      const response = await authRequest.post(
+        "/auth/employee/posts/",
+        formData
+      );
+
+      if (response.status === 201) {
+      }
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -182,9 +185,9 @@ export default function JobPostForm() {
           </div>
         ))}
 
-        <div className="sm:grid-flow-col">
-          <Button size="lg">Post</Button>
-          <span className="ml-4">Posting, please wait!</span>
+        <div className="sm:col-span-2">
+          <Button size="lg">Publish</Button>
+          <span className="ml-4">Publishing, please wait!</span>
         </div>
       </form>
     </div>
