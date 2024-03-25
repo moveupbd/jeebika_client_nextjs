@@ -1,10 +1,6 @@
 import Link from "next/link";
-import {
-  FaLocationDot,
-  FaStopwatch,
-  FaSuitcase,
-  FaUserGraduate,
-} from "react-icons/fa6";
+import { FaCalendarCheck } from "react-icons/fa";
+import { FaLocationDot, FaSuitcase, FaUserGraduate } from "react-icons/fa6";
 
 export default function JobCard({
   uid,
@@ -44,7 +40,7 @@ export default function JobCard({
           {experience}
         </span>
         <span className="flex items-center gap-1">
-          <FaStopwatch className="opacity-80" />
+          <FaCalendarCheck className="opacity-80" />
           {deadline}
         </span>
       </div>

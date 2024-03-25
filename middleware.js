@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
-
-let session = false;
+import { cookies } from "next/headers";
 
 // This function can be marked `async` if using `await` inside
 export default function middleware(request) {
-  if (session) {
+  const cookieStore = cookies();
+
+  const token = cookieStore.getAll();
+
+  console.log(request.cookies.get("access_token"));
+
+  if (!token) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 }

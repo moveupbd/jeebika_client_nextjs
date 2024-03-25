@@ -6,6 +6,11 @@ const publicRequest = axios.create({
   baseURL: baseURL,
 });
 
+export const loginRequest = axios.create({
+  baseURL: baseURL,
+  withCredentials: true,
+});
+
 export const authRequest = axios.create({
   baseURL: baseURL,
 });

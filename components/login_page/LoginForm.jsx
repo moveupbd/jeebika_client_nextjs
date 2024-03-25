@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
-import publicRequest from "@/utils/requestMethod";
+import { loginRequest } from "@/utils/requestMethod";
 import { useDispatch } from "react-redux";
 import { login } from "@/app/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
@@ -30,7 +30,7 @@ export default function LoginForm({ type }) {
         type === "employer"
           ? "/auth/employee/login/"
           : "/auth/applicant/login/";
-      const response = await publicRequest.post(url, formData);
+      const response = await loginRequest.post(url, formData);
 
       if (response.status === 201) {
         dispatch(login(response.data));

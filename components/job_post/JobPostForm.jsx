@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import publicRequest from "@/utils/requestMethod";
 import useApi from "@/hooks/useApi";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function JobPostForm() {
   const jobPostFields = [
@@ -104,6 +106,7 @@ export default function JobPostForm() {
   const [loading, setLoading] = useState(false);
 
   const { authRequest } = useApi();
+  const router = useRouter();
 
   const {
     register,
@@ -123,11 +126,12 @@ export default function JobPostForm() {
       );
 
       if (response.status === 201) {
+        toast.success("Job Post Published!");
+        router.push(`/job/${response.data.uid}`);
       }
 
       console.log(response);
     } catch (error) {
-      console.log(error);
       setError(error);
     } finally {
       setLoading(false);
@@ -187,7 +191,8 @@ export default function JobPostForm() {
 
         <div className="sm:col-span-2">
           <Button size="lg">Publish</Button>
-          <span className="ml-4">Publishing, please wait!</span>
+          {loading && <span className="ml-4">Publishing, please wait!</span>}
+          {error && <span className="ml-4">{error.message}</span>}
         </div>
       </form>
     </div>

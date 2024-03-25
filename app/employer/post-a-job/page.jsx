@@ -1,7 +1,19 @@
-import JobPostForm from "@/components/job_post/JobPostForm";
-import React from "react";
+"use client";
 
-export default function page() {
+import JobPostForm from "@/components/job_post/JobPostForm";
+import { redirect } from "next/navigation";
+import React, { useLayoutEffect } from "react";
+import { useSelector } from "react-redux";
+
+export default function Page() {
+  const { authData } = useSelector((state) => state.auth);
+
+  useLayoutEffect(() => {
+    if (!authData?.tokens.access) {
+      redirect("/employer/signin");
+    }
+  }, [authData]);
+
   return (
     <div className="py-4 container">
       <p className="text-xl md:text-3xl text-center md:text-left font-semibold">
