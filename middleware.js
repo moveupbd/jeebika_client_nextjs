@@ -7,7 +7,7 @@ export default function middleware(request) {
 
   const token = cookieStore.getAll();
 
-  console.log(request.cookies.get("access_token"));
+  // console.log(request.cookies.get("access_token"));
 
   if (!token) {
     return NextResponse.redirect(new URL("/", request.url));

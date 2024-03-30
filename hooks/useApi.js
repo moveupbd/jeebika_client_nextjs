@@ -9,7 +9,7 @@ const useApi = () => {
   const { authData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  console.log(authData);
+  // console.log(authData);
 
   useEffect(() => {
     // Add a request interceptor

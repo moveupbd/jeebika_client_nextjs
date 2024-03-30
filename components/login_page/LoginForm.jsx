@@ -6,8 +6,9 @@ import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { loginRequest } from "@/utils/requestMethod";
 import { useDispatch } from "react-redux";
-import { login } from "@/app/redux/features/auth/authSlice";
+import { login, storeUserData } from "@/app/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
+import useApi from "@/hooks/useApi";
 // import { cookies } from "next/headers";
 
 export default function LoginForm({ type }) {
@@ -34,7 +35,7 @@ export default function LoginForm({ type }) {
 
       if (response.status === 201) {
         dispatch(login(response.data));
-        router.push("/");
+        router.push("/employer/dashboard");
       }
 
       console.log(response);
