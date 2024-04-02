@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
+import MobileMenu from "./MobileMenu";
 
 export default function NavbarPrimary() {
   const { authData } = useSelector((state) => state.auth);
@@ -26,8 +27,13 @@ export default function NavbarPrimary() {
     router.push("/");
   };
 
+  function open() {
+    document.getElementById("mobileMenu").style.width = "100%";
+  }
+
   return (
     <div className="container py-4 flex items-center justify-between">
+      <MobileMenu />
       <Link href={"/"}>
         <p className="text-2xl font-semibold tracking-tighter">Jeebika.</p>
       </Link>
@@ -149,7 +155,7 @@ export default function NavbarPrimary() {
         </Link>
       </div>
       <div className="md:hidden">
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" onClick={open}>
           <HamburgerMenuIcon className="w-5 h-5" />
         </Button>
       </div>

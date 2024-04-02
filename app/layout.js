@@ -3,10 +3,9 @@ import "./globals.css";
 import GlobalNavBar from "./custom_components/GlobalNavBar";
 import NavbarPrimary from "./custom_components/NavbarPrimary";
 
-import store from "./redux/store";
 import StoreProvider from "./redux/StoreProvider";
 import { Toaster } from "react-hot-toast";
-import QueryProvider from "@/react_query/QueryProvider";
+import QueryProvider from "@/providers/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

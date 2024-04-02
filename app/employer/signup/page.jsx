@@ -2,7 +2,7 @@ import EmployerRegistrationForm from "@/components/login_page/EmployerRegistrati
 
 export default function EmployerRegistration() {
   return (
-    <div>
+    <div className="container">
       <EmployerRegistrationForm />
     </div>
   );

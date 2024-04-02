@@ -26,7 +26,7 @@ export default function JobPostForm() {
     {
       label: "Type of Company",
       type: "text",
-      key: "industry_type",
+      key: "company_type",
     },
   ];
 
@@ -137,7 +137,7 @@ export default function JobPostForm() {
 
   const { userData } = useSelector((state) => state.auth);
 
-  // console.log(userData);
+  console.log(userData);
 
   const {
     register,
@@ -200,11 +200,11 @@ export default function JobPostForm() {
         <div>
           <label className="text-sm font-medium mb-2 block">Job Category</label>
           <select
-            {...register("job_category", { required: true })}
+            {...register("category", { required: true })}
             className={`input-basic ${
-              errors?.job_category && "focus:outline-red-600"
+              errors?.category && "focus:outline-red-600"
             }`}
-            name="job_category"
+            name="category"
           >
             <option value={""}>Select One</option>
             {jobCategories.map((category) => (
@@ -225,10 +225,13 @@ export default function JobPostForm() {
             }`}
             name="service_type"
           >
-            <option value={"Full-Time"}>Full-Time</option>
-            <option value={"Part-Time"}>Part-Time</option>
-            <option value={"Contractual"}>Contractual</option>
-            <option value={"Other"}>Other</option>
+            <option value={"Hot Job (BDT 13,650)"}>Hot Job (BDT 13,650)</option>
+            <option value={"Stand Out (BDT 4515)"}>Stand Out (BDT 4515)</option>
+            <option value={"Post Pay (BDT 5145)"}>Post Pay (BDT 5145)</option>
+            <option value={"Basic (BDT 3,098)"}>Basic (BDT 3,098)</option>
+            <option value={"Free Job Posting (Free)"}>
+              Free Job Posting (Free)
+            </option>
           </select>
         </div>
 

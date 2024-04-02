@@ -6,10 +6,8 @@ import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { loginRequest } from "@/utils/requestMethod";
 import { useDispatch } from "react-redux";
-import { login, storeUserData } from "@/app/redux/features/auth/authSlice";
+import { login } from "@/app/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
-import useApi from "@/hooks/useApi";
-// import { cookies } from "next/headers";
 
 export default function LoginForm({ type }) {
   const [error, setError] = useState(null);
@@ -35,7 +33,10 @@ export default function LoginForm({ type }) {
 
       if (response.status === 201) {
         dispatch(login(response.data));
-        router.push("/employer/dashboard");
+
+        router.push(
+          type === "employer" ? "/employer/dashboard" : "/job-seeker/dashboard"
+        );
       }
 
       console.log(response);
@@ -48,7 +49,7 @@ export default function LoginForm({ type }) {
   };
 
   return (
-    <div className="max-w-md border mx-auto mt-14 p-10 rounded-lg shadow-lg space-y-10">
+    <div className="max-w-md border mx-auto my-14 p-4 md:p-10 rounded-lg shadow-lg space-y-10">
       <div className="text-center">
         <h2 className="text-xl font-semibold ">Sign in to our platform</h2>
         <h4 className="mt-2">
@@ -79,7 +80,7 @@ export default function LoginForm({ type }) {
           name="password"
         />
 
-        <div className="flex items-center justify-between my-6">
+        <div className="flex items-center justify-between flex-wrap gap-4 my-6">
           <div className="flex items-center">
             <input type="checkbox" className="w-6 h-4" />
             <span className="font-medium">Remember me</span>
