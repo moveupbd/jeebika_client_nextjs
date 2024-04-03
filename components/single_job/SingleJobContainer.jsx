@@ -50,7 +50,7 @@ export default function SingleJobContainer() {
     );
 
   return (
-    <div className="max-w-5xl border rounded-lg p-2 md:p-4 shadow-md">
+    <div className="max-w-5xl border rounded-lg p-2 md:p-4 shadow-md my-6">
       {/* company name, title, image */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
@@ -164,7 +164,8 @@ export default function SingleJobContainer() {
           employment_status={jobDetails?.employment_status}
           location={jobDetails?.location}
           compensation={jobDetails?.compensation}
-          other_benefits={jobDetails?.other_benefits}
+          other_facilities={jobDetails?.other_facilities}
+          apply_procedure={jobDetails?.apply_procedure}
         />
       </div>
 

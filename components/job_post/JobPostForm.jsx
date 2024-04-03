@@ -312,12 +312,12 @@ export default function JobPostForm() {
             Educational Requirements (in brief)
           </label>
           <textarea
-            {...register("educational_requirements")}
+            {...register("requirements")}
             type={"text"}
             className={`input-basic ${
-              errors?.educational_requirements && "focus:outline-red-600"
+              errors?.requirements && "focus:outline-red-600"
             }`}
-            name={"educational_requirements"}
+            name={"requirements"}
           />
         </div>
 
@@ -343,12 +343,12 @@ export default function JobPostForm() {
         <div>
           <label className="text-sm font-medium mb-2 block">Salary (BDT)</label>
           <input
-            {...register("salary", { required: true })}
+            {...register("compensation", { required: true })}
             type={"text"}
             className={`input-basic ${
-              errors?.salary && "focus:outline-red-600"
+              errors?.compensation && "focus:outline-red-600"
             }`}
-            name={"salary"}
+            name={"compensation"}
           />
         </div>
 
@@ -358,12 +358,12 @@ export default function JobPostForm() {
             Other Benefits
           </label>
           <textarea
-            {...register("other_benefits")}
+            {...register("other_facilities")}
             type={"text"}
             className={`input-basic ${
-              errors?.other_benefits && "focus:outline-red-600"
+              errors?.other_facilities && "focus:outline-red-600"
             }`}
-            name={"other_benefits"}
+            name={"other_facilities"}
           />
         </div>
 
@@ -447,7 +447,7 @@ export default function JobPostForm() {
                 <input
                   className="input-basic mt-3"
                   type="email"
-                  {...register("application_procedure_details")}
+                  {...register("apply_procedure")}
                 />
               </div>
             )}
@@ -459,13 +459,14 @@ export default function JobPostForm() {
                   rows={2}
                   className="input-basic mt-3"
                   type="email"
-                  {...register("application_procedure_details")}
+                  {...register("apply_procedure")}
                 />
               </div>
             )}
           </div>
         </div>
 
+        {/* Submit Button */}
         <div className="sm:col-span-2">
           <Button type={"submit"} size="lg">
             Publish

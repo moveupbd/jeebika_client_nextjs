@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://stingray-app-9qkes.ondigitalocean.app";
+const baseURL = "http://165.22.109.163";
 
 const publicRequest = axios.create({
   baseURL: baseURL,

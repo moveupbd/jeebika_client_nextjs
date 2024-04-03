@@ -82,7 +82,7 @@ export default function EmployerRegistrationForm({ type }) {
   };
 
   return (
-    <div className="w-fit border mx-auto my-14 p-4 rounded-lg shadow-lg">
+    <div className="max-w-4xl border mx-auto my-14 p-4 rounded-lg shadow-lg">
       <div className="text-center">
         <h2 className="text-xl font-semibold ">Sign up to our platform</h2>
         <h4 className="mt-2">Find best employee for your company</h4>

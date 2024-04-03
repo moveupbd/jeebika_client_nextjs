@@ -31,13 +31,13 @@ export default function MobileMenu() {
   return (
     <div
       id="mobileMenu"
-      className="fixed h-[100dvh] top-0 right-0 z-10 bg-primary/50 backdrop-blur-sm transition-all ease-in-out duration-200 md:hidden"
+      className="fixed w-0 h-[100dvh] top-0 right-0 z-10 bg-primary/50 backdrop-blur-sm transition-all ease-in-out duration-200 md:hidden"
     >
       <div className="ml-auto w-2/3 h-full bg-primary text-primary-foreground p-4 overflow-y-auto">
         <IoMdClose size={32} onClick={close} className="ml-auto" />
 
         {/* Menu */}
-        <div className="mt-10 relative h-full">
+        <div className="mt-6 relative h-full">
           <Link href={"/"} className="mb-5 block font-medium" onClick={close}>
             Home
           </Link>

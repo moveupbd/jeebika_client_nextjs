@@ -1,8 +1,9 @@
 export default function SingleJobCompensation({
   compensation,
-  other_benefits,
+  other_facilities,
   employment_status,
   location,
+  apply_procedure,
 }) {
   return (
     <div id="salary_benefits">
@@ -11,12 +12,15 @@ export default function SingleJobCompensation({
       </h2>
 
       <div className="mt-4">
-        <h4 className="md:text-lg font-medium">Other Benefits</h4>
+        <h4 className="md:text-lg font-medium">Other Facilities</h4>
         <p className="text-sm md:text-base">
-          {other_benefits} Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Explicabo sit atque dolores sapiente quae tempora, velit minima?
-          Ducimus recusandae a labore temporibus sapiente dolore nam, eveniet
-          cum, dolorem atque minima?
+          {other_facilities}
+          <br />
+          <br />
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo sit
+          atque dolores sapiente quae tempora, velit minima? Ducimus recusandae
+          a labore temporibus sapiente dolore nam, eveniet cum, dolorem atque
+          minima?
         </p>
       </div>
 
@@ -24,7 +28,7 @@ export default function SingleJobCompensation({
         <h4 className="text-lg md:text-xl font-semibold text-blue-800">
           Compensation
         </h4>
-        <p className="text-sm md:text-base">{compensation}</p>
+        <p className="text-sm md:text-base">{compensation} BDT</p>
       </div>
 
       <div className="mt-4">
@@ -39,6 +43,13 @@ export default function SingleJobCompensation({
           Job Location
         </h4>
         <p className="text-sm md:text-base">{location}</p>
+      </div>
+
+      <div className="mt-4">
+        <h4 className="text-lg md:text-xl font-semibold text-blue-800">
+          Application Procedure
+        </h4>
+        <p className="text-sm md:text-base">{apply_procedure}</p>
       </div>
     </div>
   );
