@@ -93,7 +93,7 @@ export default function LoginForm({ type }) {
 
         {error && (
           <p className="text-red-600 mb-4 font-semibold">
-            {error.response.data.detail || error.message}
+            {error?.response?.data?.detail || error.message}
           </p>
         )}
 

@@ -37,7 +37,7 @@ export default function MobileMenu() {
         <IoMdClose size={32} onClick={close} className="ml-auto" />
 
         {/* Menu */}
-        <div className="mt-6 relative h-full">
+        <div className="mt-6 relative h-[calc(100%-50px)]">
           <Link href={"/"} className="mb-5 block font-medium" onClick={close}>
             Home
           </Link>
