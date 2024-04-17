@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseURL = "http://165.22.109.163";
+// const baseURL = "http://165.22.109.163";
+const baseURL = "https://server.jeebika.com/";
 
 const publicRequest = axios.create({
   baseURL: baseURL,
