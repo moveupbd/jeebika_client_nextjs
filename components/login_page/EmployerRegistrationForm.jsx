@@ -301,7 +301,7 @@ export default function EmployerRegistrationForm({ type }) {
             className={`input-basic ${
               errors?.license_number && "focus:outline-red-600"
             }`}
-            placeholder="BGD-2020-1010110"
+            placeholder="123-456-786"
           />
 
           <label className="text-sm mb-2 block mt-6">Designation</label>
