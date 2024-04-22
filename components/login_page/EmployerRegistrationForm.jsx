@@ -7,14 +7,54 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import publicRequest from "@/utils/requestMethod";
 import toast from "react-hot-toast";
+import { Input } from "@/components/ui/input"
 
 export default function EmployerRegistrationForm({ type }) {
   const company_types = [
-    "Education/Training",
-    "Private",
-    "Government/Half-Government",
-    "NGO",
+    "Govt./Semi-govt./Autonomous",
+    "Educational Organization",
+    "Private Firm/Company",
+    "NGO/Non-profit Organization",
   ];
+
+  // const company_subtypes_govt = [
+  //   "Government/Half-Government",
+  //   "Education/Training",
+  //   "Private",
+  //   "NGO",
+  // ];
+
+  const business_category = [
+    "Accounting/Finance",
+    "Bank/ Non-Bank Fin. Institution",
+    "Supply Chain/ Procurement",
+    "Education/Training",
+    "Engineer/Architects",
+    "Garments/Textile",
+    "HR/Org. Development",
+    "Gen Mgt/Admin",
+    "Design/Creative",
+    "Production/Operation",
+    "Hospitality/ Travel/ Tourism",
+    "Commercial",
+    "Beauty Care/ Health & Fitness",
+    "IT & Telecommunication",
+    "Marketing/Sales",
+    "Customer Service/Call Centre",
+    "Media/Ad./Event Mgt.",
+    "Medical/Pharma",
+    "Agro (Plant/Animal/Fisheries)",
+    "NGO/Development",
+    "Research/Consultancy",
+    "Secretary/Receptionist",
+    "Data Entry/Operator/BPO",
+    "Driving/Motor Technician",
+    "Security/Support Service",
+    "Law/Legal",
+    "Electrician/ Construction/ Repair",
+    "Others",
+  ];
+
   const license_types = ["Private", "Government"];
   const company_size = [
     "1-50",
@@ -208,6 +248,23 @@ export default function EmployerRegistrationForm({ type }) {
             ))}
           </select>
 
+          {/* Company Sub types to be added */}
+
+          <label className="text-sm mb-2 block mt-6">Business Category</label>
+          <select
+            {...register("business_category", { required: true })}
+            type="text"
+            className={`input-basic ${
+              errors?.business_category && "focus:outline-red-600"
+            }`}
+          >
+            {business_category.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+
           <label className="text-sm mb-2 block mt-6">Company Address</label>
           <textarea
             rows={2}
@@ -293,6 +350,9 @@ export default function EmployerRegistrationForm({ type }) {
               </option>
             ))}
           </select>
+
+          <label className="text-sm mb-2 block mt-6">Company Logo</label>
+          <Input id="picture" type="file" />
 
           <label className="text-sm mb-2 block mt-6">License Number</label>
           <input
