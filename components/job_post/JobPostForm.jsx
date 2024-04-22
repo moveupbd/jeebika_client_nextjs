@@ -21,7 +21,7 @@ export default function JobPostForm() {
     {
       label: "Company Name",
       type: "text",
-      key: "company_name",
+      key: "name",
     },
     {
       label: "Type of Company",
@@ -190,7 +190,7 @@ export default function JobPostForm() {
                 errors?.[field.key] && "focus:outline-red-600"
               } font-semibold`}
               name={field.key}
-              value={userData?.[field.key]}
+              value={userData?.user?.[field.key]}
               readOnly
             />
           </div>

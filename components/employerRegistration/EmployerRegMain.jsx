@@ -7,6 +7,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import publicRequest from "@/utils/requestMethod";
+import toast from "react-hot-toast";
 
 export default function EmployerRegMain() {
   const steps = [
@@ -111,7 +112,6 @@ export default function EmployerRegMain() {
     "Others",
   ];
 
-  const license_types = ["Private", "Government"];
   const company_size = [
     "1-50",
     "51-100",
@@ -133,43 +133,47 @@ export default function EmployerRegMain() {
     formState: { errors },
   } = useForm();
 
-  const submitLogin = async (formData) => {
-    console.log(formData);
-    const data = {
-      user: {
-        name: formData.company_name,
-        username: formData.username,
-        email: formData.email,
-        phone:
-          formData.phone.length == 11 ? "+88" + formData.phone : formData.phone,
-      },
-      password: formData.password,
-      confirm_password: formData.confirmPassword,
-      company_name: formData.name,
-      company_address: formData.company_address,
-      company_logo: formData.company_logo[0],
-      website_url: formData.company_website,
-      company_size: formData.company_size,
-      company_type: formData.company_type,
-      id_card_front: formData.id_card_front[0],
-      id_card_back:
-        formData.id_card_back.length > 0 ? formData.id_card_back[0] : null,
-      year_of_eastablishment: formData.year_of_establishment,
-      business_desc: formData.business_desc,
-      license_type: "Goverment",
-      license_number: formData.license_number,
-      license_copy: formData.license_copy[0],
-      company_owner: null,
-      employee_designation: formData.designation,
-      employee_mobile: formData.employee_mobile,
-      employee_email: null,
-      employee_address: null,
+  const submitLogin = async (data_RHF) => {
+    const user = {
+      name: data_RHF.company_name,
+      username: data_RHF.username,
+      email: data_RHF.email,
+      phone:
+        data_RHF.phone.length == 11 ? "+88" + data_RHF.phone : data_RHF.phone,
     };
-    console.log(data);
+
+    const formData = new FormData();
+
+    formData.append("user", JSON.stringify(user));
+    formData.append("password", data_RHF.password);
+    formData.append("confirm_password", data_RHF.confirmPassword);
+    formData.append("category", data_RHF.business_category);
+    formData.append("company_address", data_RHF.company_address);
+    formData.append("company_logo", data_RHF.company_logo[0]);
+    formData.append("website_url", data_RHF.company_website);
+    formData.append("company_size", data_RHF.company_size);
+    formData.append("company_type", data_RHF.company_type);
+    formData.append("company_subtype", null);
+    formData.append("id_card_front", data_RHF.id_card_front[0]);
+    if (data_RHF.id_card_back.length > 0) {
+      formData.append("id_card_back", data_RHF.id_card_back[0]);
+    }
+    formData.append("year_of_eastablishment", data_RHF.year_of_establishment);
+    formData.append("business_desc", data_RHF.business_desc);
+    formData.append("license_type", "Government");
+    formData.append("license_number", data_RHF.license_number);
+    formData.append("license_copy", data_RHF.license_copy[0]);
+    formData.append("company_owner", null);
+    formData.append("representative_name", data_RHF.name);
+    formData.append("representative_designation", data_RHF.designation);
+    formData.append("representative_mobile", data_RHF.employee_mobile);
+    formData.append("representative_email", null);
+    formData.append("employee_address", null);
+
     try {
       const response = await publicRequest.post(
         "/auth/employee/register/",
-        data
+        formData
       );
 
       if (response.status === 201) {
