@@ -17,9 +17,14 @@ import SingleJobRequirements from "./SingleJobRequirements";
 import SingleJobResponsibilities from "./SingleJobResponsibilities";
 import SingleJobCompensation from "./SingleJobCompensation";
 import SingleJobCompanyInfo from "./SingleJobCompanyInfo";
+import { useSelector } from "react-redux";
 
 export default function SingleJobContainer() {
   const jobId = usePathname().split("/")[2];
+
+  const { userData } = useSelector((state) => state.auth);
+
+  console.log(userData);
 
   const fetchJobDetails = async () => {
     const response = await publicRequest.get(`/job-posts/${jobId}`);
@@ -54,13 +59,11 @@ export default function SingleJobContainer() {
       {/* company name, title, image */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <h4 className="md:text-lg font-medium">
-            {jobDetails?.company_title}
-          </h4>
+          <h4 className="md:text-lg font-medium">{jobDetails?.company_name}</h4>
           <h2 className="font-semibold text-lg md:text-2xl">
             {jobDetails?.job_designation}
           </h2>
-          <p className="text-sm md:text-base mt-7">
+          <p className="text-sm md:text-base mt-7 flex gap-1 flex-wrap">
             Application Deadline:{" "}
             <span className="font-semibold text-red-600">
               {jobDetails?.deadline}
@@ -68,7 +71,13 @@ export default function SingleJobContainer() {
           </p>
         </div>
 
-        <Image src={"/logo/job_logo.png"} alt="" width={140} height={200} />
+        <Image
+          src={userData?.company_logo}
+          alt=""
+          width={140}
+          height={200}
+          className="w-40 h-40 object-cover"
+        />
       </div>
 
       {/* CTA */}
@@ -147,6 +156,7 @@ export default function SingleJobContainer() {
       {/* Details */}
       <div className="mt-4 p-2 md:p-4 rounded-lg border space-y-8">
         <SingleJobRequirements
+          education={jobDetails?.education}
           requirements={jobDetails?.requirements}
           experiense={jobDetails?.experience}
         />
@@ -169,7 +179,11 @@ export default function SingleJobContainer() {
         />
       </div>
 
-      <SingleJobCompanyInfo />
+      <SingleJobCompanyInfo
+        company_info={jobDetails.company_info}
+        company_name={jobDetails.company_name}
+        company_type={jobDetails.company_type}
+      />
     </div>
   );
 }

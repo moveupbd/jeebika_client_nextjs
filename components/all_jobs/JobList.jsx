@@ -19,6 +19,8 @@ export default function JobList() {
     queryFn: fetchAllJobs,
   });
 
+  console.log(allJobs);
+
   if (error)
     return (
       <p className="bg-red-600 text-white p-2 container">{error.message}</p>
@@ -38,7 +40,7 @@ export default function JobList() {
           key={job.uid}
           uid={job.uid}
           title={job.job_designation}
-          company={job.company_title}
+          company={job.company_name}
           location={job.location}
           requirements={job.requirements}
           experience={job.experience}

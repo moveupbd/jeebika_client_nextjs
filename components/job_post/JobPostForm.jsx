@@ -21,12 +21,20 @@ export default function JobPostForm() {
     {
       label: "Company Name",
       type: "text",
+      reg_key: "company_name",
       key: "name",
     },
     {
       label: "Type of Company",
       type: "text",
+      reg_key: "company_type",
       key: "company_type",
+    },
+    {
+      label: "Job Category",
+      type: "text",
+      reg_key: "category",
+      key: "category",
     },
   ];
 
@@ -137,7 +145,9 @@ export default function JobPostForm() {
 
   const { userData } = useSelector((state) => state.auth);
 
-  console.log(userData);
+  let newUserData = { ...userData?.user, ...userData };
+
+  // console.log(newUserData);
 
   const {
     register,
@@ -146,7 +156,11 @@ export default function JobPostForm() {
   } = useForm();
 
   const submitForm = async (formData) => {
-    formData = { ...formData, published: new Date().toJSON().slice(0, 10) };
+    formData = {
+      ...formData,
+      published: new Date().toJSON().slice(0, 10),
+      company_info: newUserData?.business_desc,
+    };
 
     try {
       setLoading(true);
@@ -184,20 +198,20 @@ export default function JobPostForm() {
               {field.label}
             </label>
             <input
-              {...register(field.key)}
+              {...register(field.reg_key)}
               type={field.type}
               className={`input-basic ${
-                errors?.[field.key] && "focus:outline-red-600"
+                errors?.[field.reg_key] && "focus:outline-red-600"
               } font-semibold`}
               name={field.key}
-              value={userData?.user?.[field.key]}
+              value={newUserData?.[field.key]}
               readOnly
             />
           </div>
         ))}
 
         {/* Job Category Select Field */}
-        <div>
+        {/* <div>
           <label className="text-sm font-medium mb-2 block">Job Category</label>
           <select
             {...register("category", { required: true })}
@@ -213,7 +227,7 @@ export default function JobPostForm() {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         {/* Service Type Select Field */}
         <div>
@@ -271,9 +285,9 @@ export default function JobPostForm() {
           <select
             {...register("experience", { required: true })}
             className={`input-basic ${
-              errors?.education && "focus:outline-red-600"
+              errors?.experience && "focus:outline-red-600"
             }`}
-            name="education"
+            name="experience"
           >
             {experience_options.map((exp) => (
               <option key={exp} value={exp}>
@@ -287,11 +301,11 @@ export default function JobPostForm() {
         <div>
           <label className="text-sm font-medium mb-2 block">Education</label>
           <select
-            {...register("education", { required: true })}
+            {...register("requirements", { required: true })}
             className={`input-basic ${
-              errors?.education && "focus:outline-red-600"
+              errors?.requirements && "focus:outline-red-600"
             }`}
-            name="education"
+            name="requirements"
           >
             <option value={"Minimum SSC"}>Minimum SSC</option>
             <option value={"Minimum HSC"}>Minimum HSC</option>
@@ -312,18 +326,18 @@ export default function JobPostForm() {
             Educational Requirements (in brief)
           </label>
           <textarea
-            {...register("requirements")}
+            {...register("education")}
             type={"text"}
             className={`input-basic ${
-              errors?.requirements && "focus:outline-red-600"
+              errors?.education && "focus:outline-red-600"
             }`}
-            name={"requirements"}
+            name={"education"}
           />
         </div>
 
         {/* Job Location */}
         <div>
-          <label className="text-sm font-medium mb-2 block">Education</label>
+          <label className="text-sm font-medium mb-2 block">Location</label>
           <select
             {...register("location", { required: true })}
             className={`input-basic ${
@@ -336,6 +350,24 @@ export default function JobPostForm() {
                 {loc}
               </option>
             ))}
+          </select>
+        </div>
+
+        {/* Employment Status */}
+        <div>
+          <label className="text-sm font-medium mb-2 block">
+            Employment Status
+          </label>
+          <select
+            {...register("employment_status", { required: true })}
+            className={`input-basic ${
+              errors?.employment_status && "focus:outline-red-600"
+            }`}
+            name="location"
+          >
+            <option value={"Full-time"}>Full-time</option>
+            <option value={"Part-time"}>Part-time</option>
+            <option value={"Contractual"}>Contractual</option>
           </select>
         </div>
 
@@ -398,7 +430,7 @@ export default function JobPostForm() {
             <div className="flex flex-col gap-2">
               <label htmlFor="jeebika" onClick={() => setProcedure("jeebika")}>
                 <input
-                  {...register("applying_procedure", { required: true })}
+                  {...register("apply_procedure", { required: true })}
                   type="radio"
                   value="jeebika"
                   id="jeebika"
@@ -408,7 +440,7 @@ export default function JobPostForm() {
               </label>
               <label htmlFor="email" onClick={() => setProcedure("email")}>
                 <input
-                  {...register("applying_procedure", { required: true })}
+                  {...register("apply_procedure", { required: true })}
                   type="radio"
                   value="email"
                   id="email"
@@ -418,7 +450,7 @@ export default function JobPostForm() {
               </label>
               <label htmlFor="direct" onClick={() => setProcedure("direct")}>
                 <input
-                  {...register("applying_procedure", { required: true })}
+                  {...register("apply_procedure", { required: true })}
                   type="radio"
                   value="direct"
                   id="direct"
@@ -447,7 +479,7 @@ export default function JobPostForm() {
                 <input
                   className="input-basic mt-3"
                   type="email"
-                  {...register("apply_procedure")}
+                  {...register("applying_procedure_details")}
                 />
               </div>
             )}
@@ -459,7 +491,7 @@ export default function JobPostForm() {
                   rows={2}
                   className="input-basic mt-3"
                   type="email"
-                  {...register("apply_procedure")}
+                  {...register("applying_procedure_details")}
                 />
               </div>
             )}

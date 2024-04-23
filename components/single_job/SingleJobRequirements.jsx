@@ -1,4 +1,8 @@
-export default function SingleJobRequirements({ requirements, experiense }) {
+export default function SingleJobRequirements({
+  education,
+  requirements,
+  experiense,
+}) {
   return (
     <div id="requirements">
       <h2 className="text-lg md:text-xl font-semibold text-blue-800">
@@ -7,6 +11,7 @@ export default function SingleJobRequirements({ requirements, experiense }) {
 
       <div className="mt-6">
         <h4 className="md:text-lg font-medium">Education</h4>
+        <p className="text-sm md:text-base">{education}</p>
         <p className="text-sm md:text-base">{requirements}</p>
       </div>
 

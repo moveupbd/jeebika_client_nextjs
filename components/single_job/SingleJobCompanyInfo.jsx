@@ -1,4 +1,8 @@
-export default function SingleJobCompanyInfo() {
+export default function SingleJobCompanyInfo({
+  company_info,
+  company_name,
+  company_type,
+}) {
   return (
     <div
       className="mt-10 bg-neutral-100 p-2 md:p-4 rounded-lg border"
@@ -9,7 +13,8 @@ export default function SingleJobCompanyInfo() {
       </h2>
 
       <div className="mt-6">
-        <h4 className="md:text-lg font-medium">Company Name</h4>
+        <h4 className="md:text-2xl font-medium font-serif">{company_name}</h4>
+        <p className="text-sm font-light">{company_type}</p>
       </div>
 
       <div className="mt-4">
@@ -25,6 +30,8 @@ export default function SingleJobCompanyInfo() {
       <div className="mt-4">
         <h4 className="md:text-lg font-medium">Business Info</h4>
         <p className="text-sm md:text-base">
+          {company_info}
+          <br />
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
           consectetur reprehenderit architecto rem ab illum possimus reiciendis
           corporis est officiis quas ipsam numquam vero at ea perspiciatis

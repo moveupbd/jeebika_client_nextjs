@@ -28,7 +28,9 @@ export default function SingleJobCompensation({
         <h4 className="text-lg md:text-xl font-semibold text-blue-800">
           Compensation
         </h4>
-        <p className="text-sm md:text-base">{compensation} BDT</p>
+        <p className="text-sm md:text-base">
+          {compensation} (Bangladeshi Taka)
+        </p>
       </div>
 
       <div className="mt-4">

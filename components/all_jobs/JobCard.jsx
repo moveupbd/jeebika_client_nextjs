@@ -18,8 +18,8 @@ export default function JobCard({
     >
       <div className="flex justify-between gap-6">
         <div className="">
-          <h3 className="md:text-lg font-semibold">{title}</h3>
-          <h4 className="text-sm md:text-base font-medium mt-1.5">{company}</h4>
+          <h3 className="md:text-lg font-semibold text-sky-600">{title}</h3>
+          <h4 className="text-sm md:text-base mt-1.5">{company}</h4>
 
           <div className="flex flex-col gap-1 mt-5 text-xs md:text-sm">
             <span>
@@ -39,7 +39,7 @@ export default function JobCard({
           <FaSuitcase className="opacity-80" />
           {experience}
         </span>
-        <span className="flex items-center gap-1">
+        <span className="flex items-center gap-1 text-red-600 font-medium">
           <FaCalendarCheck className="opacity-80" />
           {deadline}
         </span>

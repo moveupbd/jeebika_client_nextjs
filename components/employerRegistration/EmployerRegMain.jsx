@@ -54,6 +54,7 @@ export default function EmployerRegMain() {
 
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const next = async () => {
     const fields = steps[currentStep].fields;
@@ -134,6 +135,7 @@ export default function EmployerRegMain() {
   } = useForm();
 
   const submitLogin = async (data_RHF) => {
+    setLoading(true);
     const user = {
       name: data_RHF.company_name,
       username: data_RHF.username,
@@ -186,8 +188,13 @@ export default function EmployerRegMain() {
       console.log(response);
     } catch (error) {
       console.log(error);
+      error?.response?.data?.Error.map((err) => toast.error(err));
+    } finally {
+      setLoading(false);
     }
   };
+
+  console.log(errors);
 
   return (
     <section className="my-10 p-4 max-w-5xl mx-auto">
@@ -258,10 +265,22 @@ export default function EmployerRegMain() {
               <div>
                 <label className="text-sm mb-2 block mt-6">
                   Company Username
+                  <span className="text-sky-600 font-light">
+                    {" "}
+                    (4-12 characters)
+                  </span>
                 </label>
                 <input
                   {...register("username", {
                     required: "Username is Required",
+                    minLength: {
+                      value: 4,
+                      message: "**Username must be more than 4 characters",
+                    },
+                    maxLength: {
+                      value: 12,
+                      message: "**Username must be less than 12 characters",
+                    },
                   })}
                   type="text"
                   className={`input-basic ${
@@ -269,6 +288,9 @@ export default function EmployerRegMain() {
                   }`}
                   placeholder="examplelimited"
                 />
+                <p className="text-sm text-red-600">
+                  {errors?.username?.message}
+                </p>
               </div>
 
               <div>
@@ -298,10 +320,20 @@ export default function EmployerRegMain() {
               </div>
 
               <div>
-                <label className="text-sm mb-2 block mt-6">Your password</label>
+                <label className="text-sm mb-2 block mt-6">
+                  Your password{" "}
+                  <span className="text-sky-600 font-light">
+                    {" "}
+                    (8 characters minimum)
+                  </span>
+                </label>
                 <input
                   {...register("password", {
                     required: "Password is Required",
+                    minLength: {
+                      value: 8,
+                      message: "**Password must be more than 8 characters",
+                    },
                   })}
                   type="password"
                   className={`input-basic ${
@@ -309,6 +341,9 @@ export default function EmployerRegMain() {
                   }`}
                   placeholder="••••••••"
                 />
+                <p className="text-sm text-red-600">
+                  {errors?.password?.message}
+                </p>
               </div>
 
               <div>
@@ -464,7 +499,10 @@ export default function EmployerRegMain() {
               </div>
 
               <div>
-                <label className="text-sm mb-2 block">Company Logo</label>
+                <label className="text-sm mb-2 block">
+                  Company Logo
+                  <span className="text-sky-600 font-light"> (300x300px)</span>
+                </label>
                 <div
                   className={
                     errors?.company_logo &&
@@ -486,13 +524,14 @@ export default function EmployerRegMain() {
                   className={`input-basic ${
                     errors?.license_number && "focus:outline-red-600"
                   }`}
-                  placeholder="123-456-786"
+                  placeholder="BGD-LC-1111-2222"
                 />
               </div>
 
               <div>
                 <label className="text-sm mb-2 block">
-                  License / Registration copy (Image/PDF)
+                  License / Registration copy{" "}
+                  <span className="text-sky-600 font-light"> (Image/PDF)</span>
                 </label>
                 <div
                   className={
@@ -606,7 +645,7 @@ export default function EmployerRegMain() {
             <div>
               <Button className={"max-w-4xl mt-16"} size={"lg"}>
                 <span className="text-base !font-normal">
-                  Register your account
+                  {loading ? "Please wait..." : "Register your account"}
                 </span>
               </Button>
             </div>
