@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "../ui/input";
 
 export default function JobPostForm() {
   const autoSelectedField = [
@@ -155,12 +156,25 @@ export default function JobPostForm() {
     formState: { errors },
   } = useForm();
 
-  const submitForm = async (formData) => {
-    formData = {
-      ...formData,
+  const submitForm = async (data) => {
+    console.log(data);
+    data = {
+      ...data,
       published: new Date().toJSON().slice(0, 10),
       company_info: newUserData?.business_desc,
     };
+
+    const formData = new FormData();
+
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        if (data[key] !== null && data[key] !== undefined) {
+          if (key === "source_prove") {
+            formData.append(key, data[key][0]);
+          } else formData.append(key, data[key]);
+        }
+      }
+    }
 
     try {
       setLoading(true);
@@ -188,7 +202,7 @@ export default function JobPostForm() {
   return (
     <div>
       <form
-        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm lg:text-base"
+        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm lg:text-base"
         onSubmit={handleSubmit(submitForm)}
       >
         {/* Auto Selected Fields */}
@@ -396,6 +410,7 @@ export default function JobPostForm() {
               errors?.other_facilities && "focus:outline-red-600"
             }`}
             name={"other_facilities"}
+            rows={4}
           />
         </div>
 
@@ -417,9 +432,35 @@ export default function JobPostForm() {
           </div>
         ))}
 
+        {/* Source & Circular File */}
+        <div>
+          <label className="text-sm font-medium mb-2 block">
+            Source of the circular{" "}
+            <span className="text-sky-600">(URL/ Link)</span>
+          </label>
+          <input
+            {...register("source", { required: true })}
+            type={"text"}
+            className={`input-basic ${
+              errors?.source && "focus:outline-red-600"
+            }`}
+            name={"source"}
+          />
+        </div>
+
+        <div>
+          <label className="text-sm font-medium mb-2 block">
+            Circular <span className="text-sky-600">(JPG/ PDF)</span>
+          </label>
+          <Input
+            {...register("source_prove", { required: true })}
+            type="file"
+          />
+        </div>
+
         {/* Application Procudure */}
         <div
-          className={`sm:col-span-2 lg:col-span-4 bg-neutral-100 p-2 pb-4 rounded-lg ${
+          className={`sm:col-span-2 lg:col-span-4 bg-neutral-100 p-4 pb-8 rounded-lg ${
             errors.applying_procedure ? "border-2 border-red-600 bg-red-50" : ""
           }`}
         >

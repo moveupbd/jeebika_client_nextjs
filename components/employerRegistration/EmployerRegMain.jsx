@@ -332,7 +332,7 @@ export default function EmployerRegMain() {
                     required: "Password is Required",
                     minLength: {
                       value: 8,
-                      message: "**Password must be more than 8 characters",
+                      message: "** Password must be more than 8 characters",
                     },
                   })}
                   type="password"
@@ -341,7 +341,7 @@ export default function EmployerRegMain() {
                   }`}
                   placeholder="••••••••"
                 />
-                <p className="text-sm text-red-600">
+                <p className="text-sm text-red-600 text-right">
                   {errors?.password?.message}
                 </p>
               </div>
@@ -365,6 +365,9 @@ export default function EmployerRegMain() {
                   }`}
                   placeholder="••••••••"
                 />
+                <p className="text-sm text-red-600 text-right">
+                  {errors?.confirmPassword?.message}
+                </p>
               </div>
             </div>
 

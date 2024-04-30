@@ -18,6 +18,7 @@ import SingleJobResponsibilities from "./SingleJobResponsibilities";
 import SingleJobCompensation from "./SingleJobCompensation";
 import SingleJobCompanyInfo from "./SingleJobCompanyInfo";
 import { useSelector } from "react-redux";
+import SingleJobSource from "./SingleJobSource";
 
 export default function SingleJobContainer() {
   const jobId = usePathname().split("/")[2];
@@ -180,10 +181,17 @@ export default function SingleJobContainer() {
       </div>
 
       <SingleJobCompanyInfo
-        company_info={jobDetails.company_info}
-        company_name={jobDetails.company_name}
-        company_type={jobDetails.company_type}
+        company_info={jobDetails?.company_info}
+        company_name={jobDetails?.company_name}
+        company_type={jobDetails?.company_type}
       />
+
+      <div className="mt-4 p-2 md:p-4 rounded-lg border space-y-8">
+        <SingleJobSource
+          sourceLink={jobDetails?.source}
+          sourceProve={jobDetails?.source_prove}
+        />
+      </div>
     </div>
   );
 }
