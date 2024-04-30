@@ -11,7 +11,7 @@ export default function SingleJobSource({ sourceLink, sourceProve }) {
       <div className="mt-6">
         <h4 className="md:text-lg font-medium">Source</h4>
         <Link
-          href={sourceLink}
+          href={sourceLink || "#"}
           className="text-sm md:text-base underline"
           target="blank"
         >
@@ -22,7 +22,7 @@ export default function SingleJobSource({ sourceLink, sourceProve }) {
       <div className="mt-4">
         <h4 className="md:text-lg font-medium">Reference File</h4>
         <Link
-          href={sourceProve}
+          href={sourceProve || "#"}
           className="text-blue-800 underline decoration-blue-800"
           target="blank"
         >
